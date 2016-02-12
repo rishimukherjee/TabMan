@@ -1,0 +1,15 @@
+PODS:
+  - Realm (0.98.1):
+    - Realm/Headers (= 0.98.1)
+  - Realm/Headers (0.98.1)
+  - RealmSwift (0.98.1):
+    - Realm (= 0.98.1)
+
+DEPENDENCIES:
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  Realm: ca4a4122e939e228e10694fc49011386cb2ecb07
+  RealmSwift: 7d3c7033427816a2c3417ba0d004d694987e503a
+
+COCOAPODS: 0.39.0
