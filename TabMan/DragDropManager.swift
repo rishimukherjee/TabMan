@@ -199,4 +199,13 @@ class DragDropManager: NSObject {
         }
     }
 
+    func refresh() {
+        for tableView in self.tables {
+            tableView.removeFromSuperview()
+        }
+        tables = []
+        dragContext = nil
+        
+    }
+
 }

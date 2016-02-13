@@ -10,12 +10,11 @@ import Foundation
 import RealmSwift
 
 class Floor: Object {
-
     var tables = List<Table>()
-    var size: CGSize?
+    var id = 0
 
-    func canTableBeKeptOnFloorLocation(table: Table, location: CGPoint) -> Bool {
-        return true
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
 
@@ -25,6 +24,16 @@ func getAllSavedFloors() -> Results<Floor> {
     let realm = try! Realm()
     let allFloors = realm.objects(Floor)
     return allFloors
+}
+
+func getFloorId(floor: Floor) -> Int {
+    let allFloors = getAllSavedFloors()
+    for savedFloor in allFloors {
+        if savedFloor == floor {
+            return floor.id
+        }
+    }
+    return allFloors.count + 1
 }
 
 func saveFloor(floor: Floor) {
