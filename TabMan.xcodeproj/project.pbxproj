@@ -23,7 +23,6 @@
 		DF3A3A6C1C6CC53800728B17 /* RectTableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A6B1C6CC53800728B17 /* RectTableImageView.swift */; };
 		DF3A3A6F1C6CDF7400728B17 /* DragDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */; };
 		DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A701C6CE10C00728B17 /* DragContext.swift */; };
-		DF7A8ED41C6F8C84000FCF37 /* SavedTablesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7A8ED31C6F8C84000FCF37 /* SavedTablesDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,6 @@
 		DF3A3A6B1C6CC53800728B17 /* RectTableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectTableImageView.swift; sourceTree = "<group>"; };
 		DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropManager.swift; sourceTree = "<group>"; };
 		DF3A3A701C6CE10C00728B17 /* DragContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragContext.swift; sourceTree = "<group>"; };
-		DF7A8ED31C6F8C84000FCF37 /* SavedTablesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTablesDataSource.swift; sourceTree = "<group>"; };
 		E6251C352F70D14F03B133D2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BD98CE05C1348E74F3B468 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */,
-				DF7A8ED31C6F8C84000FCF37 /* SavedTablesDataSource.swift */,
 				DF3A3A701C6CE10C00728B17 /* DragContext.swift */,
 			);
 			name = Utils;
@@ -337,7 +334,6 @@
 				DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */,
 				DF3A3A2B1C6B960300728B17 /* AppDelegate.swift in Sources */,
 				DF3A3A681C6CC4CE00728B17 /* SquareTableImageView.swift in Sources */,
-				DF7A8ED41C6F8C84000FCF37 /* SavedTablesDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

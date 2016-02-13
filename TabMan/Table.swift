@@ -27,9 +27,10 @@ enum TableType: Int {
 }
 
 class Table: Object {
-
-    var type: TableType?
-    var locationOnFloor: CGPoint?
-    var number: Int?
-    
+    dynamic var type = 0
+    dynamic var locationOnFloorX = 0.0
+    dynamic var locationOnFloorY = 0.0
+    dynamic var height = 0.0
+    dynamic var width = 0.0
+    dynamic var number = 0
 }

@@ -10,8 +10,8 @@ import Foundation
 import RealmSwift
 
 class Floor: Object {
-    var tables = List<Table>()
-    var id = 0
+    let tables = List<Table>()
+    dynamic var id = 0
 
     override static func primaryKey() -> String? {
         return "id"

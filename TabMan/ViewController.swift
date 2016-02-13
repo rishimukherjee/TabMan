@@ -25,10 +25,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var showTablesButton: UIButton!
     @IBOutlet weak var savedFloorsButton: UIButton!
 
-    var savedTableSource: SavedTablesDataSource!
-
     var dragDropManager: DragDropManager!
+    var allSavedFloors = getAllSavedFloors()
 
+    var savedTablesViewingArray: [TableImageView] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +46,9 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(dragGesture)
 
         // Create the saved floors tableView
-        savedTableSource = SavedTablesDataSource()
         saveFloorsTableView.hidden = true
-        saveFloorsTableView.delegate = savedTableSource
-        saveFloorsTableView.dataSource = savedTableSource
+        saveFloorsTableView.delegate = self
+        saveFloorsTableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,16 +59,18 @@ class ViewController: UIViewController {
         // Get all the current tables in the floor and persist it
         let currentFloor = Floor()
         currentFloor.id = getFloorId(currentFloor)
-        let tablesOnFloor = List<Table>()
         for tableView in dragDropManager.tables {
             let table = Table()
-            table.locationOnFloor = tableView.center
-            table.type = tableView.type
+            table.locationOnFloorX = Double(tableView.center.x)
+            table.locationOnFloorY = Double(tableView.center.y)
+            table.height = Double(CGRectGetHeight(tableView.frame))
+            table.width = Double(CGRectGetWidth(tableView.frame))
+            table.type = tableView.type!.rawValue
             table.number = 0
-            tablesOnFloor.append(table)
+            currentFloor.tables.append(table)
         }
         saveFloor(currentFloor)
-        savedTableSource.getRecentFloors()
+        self.getRecentFloors()
         saveFloorsTableView.reloadData()
 
         let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.", preferredStyle: .Alert)
@@ -83,11 +84,91 @@ class ViewController: UIViewController {
     @IBAction func showTablesButtonPressed(sender: AnyObject) {
         saveFloorsTableView.hidden = true
         tableContainerView.hidden = false
+        floorView.userInteractionEnabled = true
+        removeTablesAddedToFloorForViewingSavedFloor()
+        saveFloorButton.enabled = true
+    }
+
+    func arrangeViewsAndButtonsToShowSavedFloorInterface() {
+        self.saveFloorsTableView.hidden = false
+        self.tableContainerView.hidden = true
+        self.saveFloorButton.enabled = false
+    }
+
+    func deleteUnsavedChangedAndMoveToSavedFloors() {
+        let alert = UIAlertController(title: "Warning!", message: "Your unsaved changes will be deleted. Continue?", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "Ok", style: .Destructive) { (action) -> Void in
+            self.arrangeViewsAndButtonsToShowSavedFloorInterface()
+        }
+        alert.addAction(ok)
+        let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        alert.addAction(cancel)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func savedFloorsButtonPressed(sender: AnyObject) {
-        saveFloorsTableView.hidden = false
-        tableContainerView.hidden = true
+        // TODO: Ask user if he really wants to delete everything and move to floor selector
+        if dragDropManager.tables.count > 0 {
+            deleteUnsavedChangedAndMoveToSavedFloors()
+        } else {
+            arrangeViewsAndButtonsToShowSavedFloorInterface()
+        }
+
     }
 
+    func getRecentFloors() {
+        allSavedFloors = getAllSavedFloors()
+    }
+
+    func removeTablesAddedToFloorForViewingSavedFloor() {
+        for savedTable in savedTablesViewingArray {
+            savedTable.removeFromSuperview()
+        }
+        savedTablesViewingArray = []
+    }
+
+}
+
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return allSavedFloors.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("floor", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = "Floor #: " + String(allSavedFloors[indexPath.row].id)
+        return cell
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        dragDropManager.refresh()
+        removeTablesAddedToFloorForViewingSavedFloor()
+        let floorSelected = allSavedFloors[indexPath.row]
+        for table in floorSelected.tables {
+            let frameOnFloor = CGRect(origin: CGPoint(x: table.locationOnFloorX, y: table.locationOnFloorY), size: CGSize(width: table.width, height: table.height))
+            let type = TableType(rawValue: table.type)!
+
+            var newTable: TableImageView
+            switch type {
+            case .Diamond:
+                newTable = DiamondTableImageView(frame: frameOnFloor)
+            case .Round:
+                newTable = RoundTableImageView(frame: frameOnFloor)
+            case .Rect:
+                newTable = RectTableImageView(frame: frameOnFloor)
+            case .Square:
+                newTable = SquareTableImageView(frame: frameOnFloor)
+            }
+            floorView.addSubview(newTable)
+            savedTablesViewingArray.append(newTable)
+        }
+        floorView.userInteractionEnabled = false
+    }
+    
 }
