@@ -69,8 +69,8 @@ class ViewController: UIViewController {
         currentFloor.id = currentFloorEditingId ?? getFloorId(currentFloor)
         for tableView in dragDropManager.tables {
             let table = Table()
-            table.locationOnFloorX = Double(tableView.center.x)
-            table.locationOnFloorY = Double(tableView.center.y)
+            table.locationOnFloorX = Double(tableView.frame.origin.x)
+            table.locationOnFloorY = Double(tableView.frame.origin.y)
             table.height = Double(CGRectGetHeight(tableView.frame))
             table.width = Double(CGRectGetWidth(tableView.frame))
             table.type = tableView.type!.rawValue
