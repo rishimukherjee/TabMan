@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     var dragDropManager: DragDropManager!
     var allSavedFloors = getAllSavedFloors()
 
-    var savedTablesViewingArray: [TableImageView] = []
+
+    var currentFloorEditingId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +58,15 @@ class ViewController: UIViewController {
 
     @IBAction func saveFloorButtonPressed(sender: AnyObject) {
         // Get all the current tables in the floor and persist it
+        if self.dragDropManager.tables.count < 1 {
+            let alert = UIAlertController(title: "Error", message: "At at least one table to the floor.", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alert.addAction(ok)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
         let currentFloor = Floor()
-        currentFloor.id = getFloorId(currentFloor)
+        currentFloor.id = currentFloorEditingId ?? getFloorId(currentFloor)
         for tableView in dragDropManager.tables {
             let table = Table()
             table.locationOnFloorX = Double(tableView.center.x)
@@ -69,30 +77,35 @@ class ViewController: UIViewController {
             table.number = 0
             currentFloor.tables.append(table)
         }
-        saveFloor(currentFloor)
+        if currentFloorEditingId == nil {
+            saveFloor(currentFloor)
+        } else {
+            saveFloor(currentFloor, update: true)
+        }
         self.getRecentFloors()
         saveFloorsTableView.reloadData()
 
-        let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.", preferredStyle: .Alert)
-        let ok = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-            self.dragDropManager.refresh()
+        if currentFloorEditingId == nil {
+            let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+                self.dragDropManager.refresh()
+            }
+            alert.addAction(ok)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
-        alert.addAction(ok)
-        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func showTablesButtonPressed(sender: AnyObject) {
+        currentFloorEditingId = nil
         saveFloorsTableView.hidden = true
         tableContainerView.hidden = false
-        floorView.userInteractionEnabled = true
-        removeTablesAddedToFloorForViewingSavedFloor()
-        saveFloorButton.enabled = true
+        self.dragDropManager.refresh()
     }
 
     func arrangeViewsAndButtonsToShowSavedFloorInterface() {
         self.saveFloorsTableView.hidden = false
         self.tableContainerView.hidden = true
-        self.saveFloorButton.enabled = false
+        self.dragDropManager.refresh()
     }
 
     func deleteUnsavedChangedAndMoveToSavedFloors() {
@@ -120,13 +133,6 @@ class ViewController: UIViewController {
         allSavedFloors = getAllSavedFloors()
     }
 
-    func removeTablesAddedToFloorForViewingSavedFloor() {
-        for savedTable in savedTablesViewingArray {
-            savedTable.removeFromSuperview()
-        }
-        savedTablesViewingArray = []
-    }
-
 }
 
 
@@ -148,8 +154,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         dragDropManager.refresh()
-        removeTablesAddedToFloorForViewingSavedFloor()
         let floorSelected = allSavedFloors[indexPath.row]
+        currentFloorEditingId = floorSelected.id
         for table in floorSelected.tables {
             let frameOnFloor = CGRect(origin: CGPoint(x: table.locationOnFloorX, y: table.locationOnFloorY), size: CGSize(width: table.width, height: table.height))
             let type = TableType(rawValue: table.type)!
@@ -166,9 +172,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 newTable = SquareTableImageView(frame: frameOnFloor)
             }
             floorView.addSubview(newTable)
-            savedTablesViewingArray.append(newTable)
+            dragDropManager.tables.append(newTable)
         }
-        floorView.userInteractionEnabled = false
     }
     
 }

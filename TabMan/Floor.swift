@@ -36,9 +36,9 @@ func getFloorId(floor: Floor) -> Int {
     return allFloors.count + 1
 }
 
-func saveFloor(floor: Floor) {
+func saveFloor(floor: Floor, update: Bool = false) {
     let realm = try! Realm()
     try! realm.write {
-        realm.add(floor)
+        realm.add(floor, update: update)
     }
 }
