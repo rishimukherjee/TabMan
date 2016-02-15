@@ -8,15 +8,27 @@
 
 import UIKit
 
+/**
+ Type of the floor
+
+ - Floor: Where tables are kept for customers to sit and eat.
+ - PickerContainer: Table storage.
+ */
 enum TableOn: Int {
     case Floor = 0
     case PickerContainer = 1
 }
 
+/// ImageView for tables. It has a textfield to give it a unique number. Also, setting the type variable will set the correct image.
 class TableImageView: UIImageView, UITextFieldDelegate {
 
+    /// Helper varible to store the type
     private var _type: TableType!
+
+    /// Textfield to store the id of the table
     private var idField: UITextField!
+
+    /// Helps get and set the id of the table. Set sets the textfield's text.
     var id: Int? {
         get {
             if let text = idField.text {
@@ -30,6 +42,7 @@ class TableImageView: UIImageView, UITextFieldDelegate {
         }
     }
 
+    /// Hides the `idField` if he image is a picker.
     var onFloor: Bool {
         set {
             idField.hidden = !newValue
@@ -39,6 +52,7 @@ class TableImageView: UIImageView, UITextFieldDelegate {
         }
     }
 
+    /// Sets the image of the view based on its type
     var type: TableType {
         set {
             self.image = UIImage(named: newValue.imageName)
@@ -66,6 +80,9 @@ class TableImageView: UIImageView, UITextFieldDelegate {
         self.type = type
     }
 
+    /**
+     Create and add the id textfield to the table
+    */
     func createIdTextField() {
         idField = UITextField()
         idField.delegate = self

@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+/// Types of tables and get the image name of each type.
 enum TableType: Int {
 
     case Round = 0
@@ -26,6 +27,7 @@ enum TableType: Int {
     }
 }
 
+/// Table model
 class Table: Object {
     dynamic var type = 0
     dynamic var locationOnFloorX = 0.0

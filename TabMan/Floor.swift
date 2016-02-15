@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+/// Floor model
 class Floor: Object {
     let tables = List<Table>()
     dynamic var id = 0
@@ -20,12 +21,14 @@ class Floor: Object {
 
 // Helper functions
 
+/// Get all saved floors
 func getAllSavedFloors() -> Results<Floor> {
     let realm = try! Realm()
     let allFloors = realm.objects(Floor)
     return allFloors
 }
 
+/// Get floor id of given floor
 func getFloorId(floor: Floor) -> Int {
     let allFloors = getAllSavedFloors()
     for savedFloor in allFloors {
@@ -36,6 +39,7 @@ func getFloorId(floor: Floor) -> Int {
     return allFloors.count + 1
 }
 
+/// Save a floor. Update if saved floor.
 func saveFloor(floor: Floor, update: Bool = false) {
     let realm = try! Realm()
     try! realm.write {

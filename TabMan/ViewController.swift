@@ -11,24 +11,30 @@ import RealmSwift
 
 class ViewController: UIViewController {
 
+    /// View components
     @IBOutlet weak var saveFloorsTableView: UITableView!
     @IBOutlet weak var tableContainerView: UIView!
     @IBOutlet weak var floorView: UIView!
-    
+
+    /// Pickers
     @IBOutlet weak var diamondPicker: TableImageView!
     @IBOutlet weak var rectPicker: TableImageView!
     @IBOutlet weak var roundPicker: TableImageView!
     @IBOutlet weak var squarePicker: TableImageView!
 
-
+    /// Butoons
     @IBOutlet weak var saveFloorButton: UIButton!
     @IBOutlet weak var showTablesButton: UIButton!
     @IBOutlet weak var savedFloorsButton: UIButton!
 
+    /// dragDrop manager instance
     var dragDropManager: DragDropManager!
+
+    /// Get all floors which have been saved
     var allSavedFloors = getAllSavedFloors()
 
 
+    /// If a floor is currently getting edited, this variable stores it's id
     var currentFloorEditingId: Int?
 
     override func viewDidLoad() {
@@ -67,7 +73,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func saveFloorButtonPressed(sender: AnyObject) {
-        // Get all the current tables in the floor and persist it
+        // CHeck if tables with same id exist. If yes do not save and show an alert.
         for tableView1 in dragDropManager.tables {
             for tableView2 in dragDropManager.tables {
                 if tableView1 != tableView2 {
@@ -81,6 +87,8 @@ class ViewController: UIViewController {
                 }
             }
         }
+
+        /// If no tables are on the floor, do not let them save the floor.
         if self.dragDropManager.tables.count < 1 {
             let alert = UIAlertController(title: "Error", message: "At least one table to the floor.", preferredStyle: .Alert)
             let ok = UIAlertAction(title: "Ok", style: .Default, handler: nil)
@@ -88,6 +96,8 @@ class ViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
+
+        /// Save or update the current floor or new floor.
         let currentFloor = Floor()
         currentFloor.id = currentFloorEditingId ?? getFloorId(currentFloor)
         for tableView in dragDropManager.tables {
@@ -108,7 +118,7 @@ class ViewController: UIViewController {
         self.getRecentFloors()
         saveFloorsTableView.reloadData()
 
-
+        /// Show alert that everything is saved and then clear the floor
         let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.",preferredStyle: .Alert)
         let ok = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
             self.dragDropManager.refresh()

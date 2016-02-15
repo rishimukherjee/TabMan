@@ -8,20 +8,44 @@
 
 import UIKit
 
+/// Manages drag and drop of tables
 class DragDropManager: NSObject {
 
+    /// Information about current object being dragged
     var dragContext: DragContext?
+
+    /// The floor view where tables are arranged. In a restaurant this is the place where tables are kept and you sit on one of them and are served.
     var floor: UIView
+
+    /// This stores the table pickers. In a restaurant this is the place where tables are stored and you are not allowed to enter.
     var tableContainer: UIView
+
+    /// Current tables which are on the floor
     var tables: [TableImageView] = []
+
+    /// These are the pickers which are kept in `tableContainer`
     var pickers: [TableImageView]
 
+    /**
+     Initializes a dragDropManager
+     
+     - Parameters:
+        - floor: The floor view
+        - tableContainer: The tableContainer view
+        - pickers: Pickers are the views which are storage of different shapes of tables
+    */
     init(floor: UIView, tableContainer: UIView, pickers: [TableImageView]) {
         self.pickers = pickers
         self.floor = floor
         self.tableContainer = tableContainer
     }
 
+    /**
+     Adds the table to the floor if dragging happened from PickerContainer and is added to the floor
+     
+     - Parameters:
+        - table: The table that is going to be added
+    */
     func addTableToFloor(table: TableImageView) {
         if let context = self.dragContext {
             if context.draggedFromType == .PickerContainer {
@@ -30,6 +54,13 @@ class DragDropManager: NSObject {
         }
     }
 
+    /**
+     Deletes a table if the dragged table is from the floor. Deletion occurs when 
+     a the dragged table is released outside the bounds of the floor.
+
+     - Parameters:
+        - table: The table that is going to be deleted
+     */
     func removeTableFromFloor(table: TableImageView) {
         if let context = self.dragContext {
             // Only tables from floor can be removed
@@ -42,6 +73,13 @@ class DragDropManager: NSObject {
         }
     }
 
+
+    /**
+     Utility function which helps to move the context view according to touch.
+
+     - Parameters:
+        - sender: The UIPanGestureRecognizer
+    */
     func dragTableWithGesture(sender: UIPanGestureRecognizer) {
         if let context = self.dragContext {
             let pointOnView = sender.locationInView(sender.view)
@@ -49,6 +87,15 @@ class DragDropManager: NSObject {
         }
     }
 
+    /**
+     Utility function which helps determine if a table is on the floor or outside the floor.
+
+     - Parameters:
+        - table: The tableview
+        - position: The position of the tableview on floor
+     
+     - Returns: Returns `true` if the the table is on the floor else `false`
+     */
     func isTableOnFloor(table: TableImageView, position: CGPoint) -> Bool {
         let viewBeingDraggedWidth = CGRectGetWidth(table.frame)
         let viewBeingDraggedHeight = CGRectGetHeight(table.frame)
@@ -75,6 +122,15 @@ class DragDropManager: NSObject {
         return false
     }
 
+
+    /**
+     Utility function which helps determine if a table intersects with another table.
+
+     - Parameters:
+     - table: The tableview
+
+     - Returns: Returns `true` if the the table intersects with another table on floor else `false`
+     */
     func isTablePositionValidOnFloor(table: TableImageView) -> Bool {
 
         for otherTable in tables {
@@ -91,6 +147,12 @@ class DragDropManager: NSObject {
         return true
     }
 
+    /**
+     Called when UIPanGestureRecognizer detects a pan gesture
+     
+     - Parameters:
+        - sender: The gesture recognizer
+    */
     func dragging(sender: UIPanGestureRecognizer) {
         print("Dragging..")
         switch sender.state {
@@ -118,7 +180,6 @@ class DragDropManager: NSObject {
                     case .PickerContainer:
                         print("Dragging from picker container!")
                         // Create a new table which can be kept on the floor and drag that instead of dragging the picker
-
                         switch table.type {
                         case .Diamond:
                             let newTable = TableImageView(frame: table.frame, type: .Diamond)
@@ -197,6 +258,9 @@ class DragDropManager: NSObject {
         }
     }
 
+    /**
+     Function to clear the tables and remove them from the floor
+     */
     func refresh() {
         for tableView in self.tables {
             tableView.removeFromSuperview()
