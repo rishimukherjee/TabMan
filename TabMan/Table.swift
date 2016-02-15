@@ -32,5 +32,5 @@ class Table: Object {
     dynamic var locationOnFloorY = 0.0
     dynamic var height = 0.0
     dynamic var width = 0.0
-    dynamic var number = 0
+    let number = RealmOptional<Int>()
 }

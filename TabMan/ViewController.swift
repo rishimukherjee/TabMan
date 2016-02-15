@@ -36,9 +36,13 @@ class ViewController: UIViewController {
 
         // Give type to the pickers
         self.diamondPicker.type = .Diamond
+        self.diamondPicker.onFloor = false
         self.rectPicker.type = .Rect
+        self.rectPicker.onFloor = false
         self.roundPicker.type = .Round
+        self.roundPicker.onFloor = false
         self.squarePicker.type = .Square
+        self.squarePicker.onFloor = false
 
         // Setup the dragDropManager
         dragDropManager = DragDropManager(floor: floorView, tableContainer: tableContainerView, pickers: [
@@ -64,8 +68,21 @@ class ViewController: UIViewController {
 
     @IBAction func saveFloorButtonPressed(sender: AnyObject) {
         // Get all the current tables in the floor and persist it
+        for tableView1 in dragDropManager.tables {
+            for tableView2 in dragDropManager.tables {
+                if tableView1 != tableView2 {
+                    if tableView1.id != nil && tableView2.id != nil && tableView1.id == tableView2.id {
+                        let alert = UIAlertController(title: "Error", message: "Two tables have same ids. Please check.", preferredStyle: .Alert)
+                        let ok = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                        alert.addAction(ok)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        return
+                    }
+                }
+            }
+        }
         if self.dragDropManager.tables.count < 1 {
-            let alert = UIAlertController(title: "Error", message: "At at least one table to the floor.", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Error", message: "At least one table to the floor.", preferredStyle: .Alert)
             let ok = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(ok)
             self.presentViewController(alert, animated: true, completion: nil)
@@ -80,7 +97,7 @@ class ViewController: UIViewController {
             table.height = Double(CGRectGetHeight(tableView.frame))
             table.width = Double(CGRectGetWidth(tableView.frame))
             table.type = tableView.type.rawValue
-            table.number = 0
+            table.number.value = tableView.id
             currentFloor.tables.append(table)
         }
         if currentFloorEditingId == nil {
@@ -91,26 +108,33 @@ class ViewController: UIViewController {
         self.getRecentFloors()
         saveFloorsTableView.reloadData()
 
-        if currentFloorEditingId == nil {
-            let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.", preferredStyle: .Alert)
-            let ok = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-                self.dragDropManager.refresh()
-            }
-            alert.addAction(ok)
-            self.presentViewController(alert, animated: true, completion: nil)
+
+        let alert = UIAlertController(title: "Floor Saved", message: "Floor saved and can be accessed from floors.",preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+            self.dragDropManager.refresh()
         }
+        alert.addAction(ok)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    func showTableSelector() {
+        saveFloorsTableView.hidden = true
+        tableContainerView.hidden = false
+    }
+
+    func showSavedFloorTable() {
+        self.saveFloorsTableView.hidden = false
+        self.tableContainerView.hidden = true
     }
 
     @IBAction func showTablesButtonPressed(sender: AnyObject) {
         currentFloorEditingId = nil
-        saveFloorsTableView.hidden = true
-        tableContainerView.hidden = false
+        showTableSelector()
         self.dragDropManager.refresh()
     }
 
     func arrangeViewsAndButtonsToShowSavedFloorInterface() {
-        self.saveFloorsTableView.hidden = false
-        self.tableContainerView.hidden = true
+        showSavedFloorTable()
         self.dragDropManager.refresh()
     }
 
@@ -127,7 +151,7 @@ class ViewController: UIViewController {
 
     @IBAction func savedFloorsButtonPressed(sender: AnyObject) {
         // TODO: Ask user if he really wants to delete everything and move to floor selector
-        if dragDropManager.tables.count > 0 {
+        if dragDropManager.tables.count > 0 && currentFloorEditingId == nil {
             deleteUnsavedChangedAndMoveToSavedFloors()
         } else {
             arrangeViewsAndButtonsToShowSavedFloorInterface()
@@ -165,21 +189,23 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         for table in floorSelected.tables {
             let frameOnFloor = CGRect(origin: CGPoint(x: table.locationOnFloorX, y: table.locationOnFloorY), size: CGSize(width: table.width, height: table.height))
             let type = TableType(rawValue: table.type)!
-
+            let id: Int? = table.number.value
             var newTable: TableImageView
             switch type {
             case .Diamond:
                 newTable = TableImageView(frame: frameOnFloor, type: .Diamond)
             case .Round:
-                newTable = TableImageView(frame: frameOnFloor, type: .Rect)
+                newTable = TableImageView(frame: frameOnFloor, type: .Round)
             case .Rect:
                 newTable = TableImageView(frame: frameOnFloor, type: .Rect)
             case .Square:
                 newTable = TableImageView(frame: frameOnFloor, type: .Square)
             }
+            newTable.id = id
             floorView.addSubview(newTable)
             dragDropManager.tables.append(newTable)
         }
+        showTableSelector()
     }
     
 }
