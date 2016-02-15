@@ -5,7 +5,7 @@
 1. Create floors and add tables of 4 types on them.
 2. The app makes sure the tables do not overlap.
 3. Floors can be saved and can be edited.
-4. Tables can change position on editiing of saved `floor` but more tables cannot be added.
+4. Tables can change position on editing of saved `floor` and add more tables.
 
 #### To install the app:
 
@@ -39,9 +39,6 @@ The project is divided into the following:
 #### Design Decisions
 1. I used `realm` for percistance because of its simplicity and readability.
 2. The drag and drop is handled in a separate class `DragDropManager` to avoid large viewController.
-
-#### Trade-offs
-1. Currently the app does not support adding tables while editing saved floors.
 
 
 #### Third Party Library
