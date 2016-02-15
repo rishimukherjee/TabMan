@@ -118,30 +118,28 @@ class DragDropManager: NSObject {
                     case .PickerContainer:
                         print("Dragging from picker container!")
                         // Create a new table which can be kept on the floor and drag that instead of dragging the picker
-                        guard let draggedTableType = table.type else {
-                            return
-                        }
-                        switch draggedTableType {
+
+                        switch table.type {
                         case .Diamond:
-                            let newTable = DiamondTableImageView(frame: table.frame)
+                            let newTable = TableImageView(frame: table.frame, type: .Diamond)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         case .Rect:
-                            let newTable = RectTableImageView(frame: table.frame)
+                            let newTable = TableImageView(frame: table.frame, type: .Rect)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         case .Round:
-                            let newTable = RoundTableImageView(frame: table.frame)
+                            let newTable = TableImageView(frame: table.frame, type: .Round)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         default:
-                            let newTable = SquareTableImageView(frame: table.frame)
+                            let newTable = TableImageView(frame: table.frame, type: .Square)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)

@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableContainerView: UIView!
     @IBOutlet weak var floorView: UIView!
     
-    @IBOutlet weak var diamondPicker: DiamondTableImageView!
-    @IBOutlet weak var rectPicker: RectTableImageView!
-    @IBOutlet weak var roundPicker: RoundTableImageView!
-    @IBOutlet weak var squarePicker: SquareTableImageView!
+    @IBOutlet weak var diamondPicker: TableImageView!
+    @IBOutlet weak var rectPicker: TableImageView!
+    @IBOutlet weak var roundPicker: TableImageView!
+    @IBOutlet weak var squarePicker: TableImageView!
 
 
     @IBOutlet weak var saveFloorButton: UIButton!
@@ -33,6 +33,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Give type to the pickers
+        self.diamondPicker.type = .Diamond
+        self.rectPicker.type = .Rect
+        self.roundPicker.type = .Round
+        self.squarePicker.type = .Square
 
         // Setup the dragDropManager
         dragDropManager = DragDropManager(floor: floorView, tableContainer: tableContainerView, pickers: [
@@ -73,7 +79,7 @@ class ViewController: UIViewController {
             table.locationOnFloorY = Double(tableView.frame.origin.y)
             table.height = Double(CGRectGetHeight(tableView.frame))
             table.width = Double(CGRectGetWidth(tableView.frame))
-            table.type = tableView.type!.rawValue
+            table.type = tableView.type.rawValue
             table.number = 0
             currentFloor.tables.append(table)
         }
@@ -163,13 +169,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             var newTable: TableImageView
             switch type {
             case .Diamond:
-                newTable = DiamondTableImageView(frame: frameOnFloor)
+                newTable = TableImageView(frame: frameOnFloor, type: .Diamond)
             case .Round:
-                newTable = RoundTableImageView(frame: frameOnFloor)
+                newTable = TableImageView(frame: frameOnFloor, type: .Rect)
             case .Rect:
-                newTable = RectTableImageView(frame: frameOnFloor)
+                newTable = TableImageView(frame: frameOnFloor, type: .Rect)
             case .Square:
-                newTable = SquareTableImageView(frame: frameOnFloor)
+                newTable = TableImageView(frame: frameOnFloor, type: .Square)
             }
             floorView.addSubview(newTable)
             dragDropManager.tables.append(newTable)

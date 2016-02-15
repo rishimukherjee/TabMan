@@ -17,10 +17,6 @@
 		DF3A3A5D1C6C840300728B17 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A5C1C6C840300728B17 /* Table.swift */; };
 		DF3A3A5F1C6C8D8000728B17 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A5E1C6C8D8000728B17 /* Floor.swift */; };
 		DF3A3A621C6C998B00728B17 /* TableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A611C6C998B00728B17 /* TableImageView.swift */; };
-		DF3A3A661C6CC3E600728B17 /* RoundTableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A651C6CC3E600728B17 /* RoundTableImageView.swift */; };
-		DF3A3A681C6CC4CE00728B17 /* SquareTableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A671C6CC4CE00728B17 /* SquareTableImageView.swift */; };
-		DF3A3A6A1C6CC50800728B17 /* DiamondTableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A691C6CC50800728B17 /* DiamondTableImageView.swift */; };
-		DF3A3A6C1C6CC53800728B17 /* RectTableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A6B1C6CC53800728B17 /* RectTableImageView.swift */; };
 		DF3A3A6F1C6CDF7400728B17 /* DragDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */; };
 		DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A701C6CE10C00728B17 /* DragContext.swift */; };
 /* End PBXBuildFile section */
@@ -50,10 +46,6 @@
 		DF3A3A5C1C6C840300728B17 /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		DF3A3A5E1C6C8D8000728B17 /* Floor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		DF3A3A611C6C998B00728B17 /* TableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableImageView.swift; sourceTree = "<group>"; };
-		DF3A3A651C6CC3E600728B17 /* RoundTableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTableImageView.swift; sourceTree = "<group>"; };
-		DF3A3A671C6CC4CE00728B17 /* SquareTableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareTableImageView.swift; sourceTree = "<group>"; };
-		DF3A3A691C6CC50800728B17 /* DiamondTableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondTableImageView.swift; sourceTree = "<group>"; };
-		DF3A3A6B1C6CC53800728B17 /* RectTableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectTableImageView.swift; sourceTree = "<group>"; };
 		DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropManager.swift; sourceTree = "<group>"; };
 		DF3A3A701C6CE10C00728B17 /* DragContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragContext.swift; sourceTree = "<group>"; };
 		E6251C352F70D14F03B133D2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,10 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				DF3A3A611C6C998B00728B17 /* TableImageView.swift */,
-				DF3A3A651C6CC3E600728B17 /* RoundTableImageView.swift */,
-				DF3A3A671C6CC4CE00728B17 /* SquareTableImageView.swift */,
-				DF3A3A691C6CC50800728B17 /* DiamondTableImageView.swift */,
-				DF3A3A6B1C6CC53800728B17 /* RectTableImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -323,17 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF3A3A6A1C6CC50800728B17 /* DiamondTableImageView.swift in Sources */,
 				DF3A3A5F1C6C8D8000728B17 /* Floor.swift in Sources */,
 				DF3A3A621C6C998B00728B17 /* TableImageView.swift in Sources */,
 				DF3A3A5D1C6C840300728B17 /* Table.swift in Sources */,
 				DF3A3A6F1C6CDF7400728B17 /* DragDropManager.swift in Sources */,
 				DF3A3A2D1C6B960300728B17 /* ViewController.swift in Sources */,
-				DF3A3A6C1C6CC53800728B17 /* RectTableImageView.swift in Sources */,
-				DF3A3A661C6CC3E600728B17 /* RoundTableImageView.swift in Sources */,
 				DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */,
 				DF3A3A2B1C6B960300728B17 /* AppDelegate.swift in Sources */,
-				DF3A3A681C6CC4CE00728B17 /* SquareTableImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +448,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TabMan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rishimukherjee.TabMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -476,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TabMan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rishimukherjee.TabMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";

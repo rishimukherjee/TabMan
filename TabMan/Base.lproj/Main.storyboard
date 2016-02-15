@@ -21,13 +21,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoN-Hi-qFk">
                                 <rect key="frame" x="0.0" y="53" width="205" height="547"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rect" translatesAutoresizingMaskIntoConstraints="NO" id="ARP-0x-78E" customClass="RectTableImageView" customModule="TabMan" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rect" translatesAutoresizingMaskIntoConstraints="NO" id="ARP-0x-78E" customClass="TableImageView" customModule="TabMan" customModuleProvider="target">
                                         <rect key="frame" x="42" y="167" width="120" height="72"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Round" translatesAutoresizingMaskIntoConstraints="NO" id="cYi-Hy-UuI" customClass="RoundTableImageView" customModule="TabMan" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Round" translatesAutoresizingMaskIntoConstraints="NO" id="cYi-Hy-UuI" customClass="TableImageView" customModule="TabMan" customModuleProvider="target">
                                         <rect key="frame" x="52" y="289" width="100" height="100"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Square" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-e8-KZ3" customClass="SquareTableImageView" customModule="TabMan" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Square" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-e8-KZ3" customClass="TableImageView" customModule="TabMan" customModuleProvider="target">
                                         <rect key="frame" x="53" y="439" width="100" height="100"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbd-fT-2tL">
@@ -51,7 +51,7 @@
                                             <constraint firstAttribute="width" constant="179" id="apF-vL-YpI"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="IB4-4B-Xo3" customClass="DiamondTableImageView" customModule="TabMan" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Diamond" translatesAutoresizingMaskIntoConstraints="NO" id="IB4-4B-Xo3" customClass="TableImageView" customModule="TabMan" customModuleProvider="target">
                                         <rect key="frame" x="48" y="8" width="110" height="110"/>
                                     </imageView>
                                 </subviews>

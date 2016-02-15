@@ -15,6 +15,31 @@ enum TableOn: Int {
 
 class TableImageView: UIImageView {
 
-    var type: TableType?
+    private var _type: TableType!
+
+    var type: TableType {
+        set {
+            self.image = UIImage(named: newValue.imageName)
+            _type = newValue
+        }
+        get {
+            return self._type
+        }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        userInteractionEnabled = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        userInteractionEnabled = true
+    }
+
+    convenience init(frame: CGRect, type: TableType) {
+        self.init(frame: frame)
+        self.type = type
+    }
 
 }
