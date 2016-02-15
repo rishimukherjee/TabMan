@@ -40,7 +40,9 @@ class DragContext {
                     height: CGRectGetHeight(self.draggedView.frame)
                 )
                 self.draggedView.removeFromSuperview()
-                self.draggedFrom.addSubview(self.draggedView)
+                if self.draggedFromType == .Floor {
+                    self.draggedFrom.addSubview(self.draggedView)
+                }
         })
     }
 }
