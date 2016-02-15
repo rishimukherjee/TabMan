@@ -2,10 +2,10 @@
 
 #### This is a table manager for restaurants. Restaurants can:
 
-..* Create floors and add tables of 4 types on them.
-..* The app makes sure the tables do not overlap.
-..* Floors can be saved and can be edited.
-..* Tables can change position on editiing of saved `floor` but more tables cannot be added.
+1. Create floors and add tables of 4 types on them.
+2. The app makes sure the tables do not overlap.
+3. Floors can be saved and can be edited.
+4. Tables can change position on editiing of saved `floor` but more tables cannot be added.
 
 #### To install the app:
 
@@ -21,15 +21,15 @@
 The project is divided into the following:
 
 1. `Utils`
-..* `DragDropManager`: Manages the whole drag and drop in the system. Takes decision on adding and delete of Tables based on its start and destination superviews. Also, puts back a view to its picked up location if it ended on invalid location. It uses `UIPanGestureRecognizer` to handle drag gestures. 
-..* `DragContext`: The current drag context. It has all information of the current dragged view.
+  * `DragDropManager`: Manages the whole drag and drop in the system. Takes decision on adding and delete of Tables based on its start and destination superviews. Also, puts back a view to its picked up location if it ended on invalid location. It uses `UIPanGestureRecognizer` to handle drag gestures. 
+  * `DragContext`: The current drag context. It has all information of the current dragged view.
 
 2. `Views`
-..* `TableImageView`: Subclass of `UIImageView` which changes image based on the type of the table.
+  * `TableImageView`: Subclass of `UIImageView` which changes image based on the type of the table.
 
 3. `Models`
-..* `Table`: Stores information about a table like table type, table location on floor, area and number.
-..* `Floor`: It stores the floor `id` and a list of `Table` which are kept on the floor.
+  * `Table`: Stores information about a table like table type, table location on floor, area and number.
+  * `Floor`: It stores the floor `id` and a list of `Table` which are kept on the floor.
 
 4. `ViewController`: Handles the button press actions, decides what to do based on when the save button was pressed, decides when to show the saved floor selector `UITableView` and when to show the table type selector.
 
