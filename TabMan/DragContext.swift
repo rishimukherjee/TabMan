@@ -23,7 +23,6 @@ class DragContext {
     /// The superview type
     var draggedFromType: TableOn
 
-
     /**
      Initializer for the class variables
      

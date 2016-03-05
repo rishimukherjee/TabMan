@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2C0EFE23AC8290EF89726D95DAF4D6D4CAFCE080",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "706D0C4C01E09830029DD9496F3152ECDCC3D3FF" : 0,
+    "2C0EFE23AC8290EF89726D95DAF4D6D4CAFCE080" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B6240E4E-8287-423E-901F-F06B5140C29A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "706D0C4C01E09830029DD9496F3152ECDCC3D3FF" : "TabMan\/TabMan\/GPCPolygon\/",
+    "2C0EFE23AC8290EF89726D95DAF4D6D4CAFCE080" : "TabMan\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TabMan",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TabMan.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rishimukherjee\/TabMan.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2C0EFE23AC8290EF89726D95DAF4D6D4CAFCE080"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jpswensen\/GPCPolygon.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "706D0C4C01E09830029DD9496F3152ECDCC3D3FF"
+    }
+  ]
+}

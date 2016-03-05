@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     /// Get all floors which have been saved
     var allSavedFloors = getAllSavedFloors()
 
+    var groupManager: GroupManager!
+
 
     /// If a floor is currently getting edited, this variable stores it's id
     var currentFloorEditingId: Int?
@@ -66,6 +68,9 @@ class ViewController: UIViewController {
         saveFloorsTableView.hidden = true
         saveFloorsTableView.delegate = self
         saveFloorsTableView.dataSource = self
+
+        groupManager = GroupManager(delegate: dragDropManager, controller: self)
+        dragDropManager.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,7 +150,7 @@ class ViewController: UIViewController {
 
     func arrangeViewsAndButtonsToShowSavedFloorInterface() {
         showSavedFloorTable()
-        self.dragDropManager.refresh()
+        dragDropManager.refresh()
     }
 
     func deleteUnsavedChangedAndMoveToSavedFloors() {
@@ -218,4 +223,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         showTableSelector()
     }
     
+}
+
+
+extension ViewController: DragDropManagerDelegate {
+
+    func tableMoved(table: TableImageView) {
+        for table in dragDropManager.tables {
+            table.tapped = false
+        }
+        groupManager.removePath()
+    }
+
+    func tableAddedOnFloor(table: TableImageView) {
+        let gesture = UITapGestureRecognizer(target: groupManager, action: Selector("tapped:"))
+        table.addGestureRecognizer(gesture)
+    }
+
 }

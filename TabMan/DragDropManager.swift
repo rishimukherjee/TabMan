@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol DragDropManagerDelegate {
+    func tableAddedOnFloor(table: TableImageView)
+    func tableMoved(table: TableImageView)
+}
+
 /// Manages drag and drop of tables
 class DragDropManager: NSObject {
 
@@ -26,6 +31,10 @@ class DragDropManager: NSObject {
     /// These are the pickers which are kept in `tableContainer`
     var pickers: [TableImageView]
 
+
+    /// Drag drop manager delegate
+    var delegate: DragDropManagerDelegate?
+
     /**
      Initializes a dragDropManager
      
@@ -38,6 +47,7 @@ class DragDropManager: NSObject {
         self.pickers = pickers
         self.floor = floor
         self.tableContainer = tableContainer
+        super.init()
     }
 
     /**
@@ -174,6 +184,7 @@ class DragDropManager: NSObject {
                         // simple dragging
                         print("Dragging from floor!")
                         self.dragContext = DragContext(draggedView: table, draggedFromType: .Floor)
+                        self.delegate?.tableMoved(table)
                         table.removeFromSuperview()
                         sender.view?.addSubview(table)
                         self.dragTableWithGesture(sender)
@@ -183,24 +194,28 @@ class DragDropManager: NSObject {
                         switch table.type {
                         case .Diamond:
                             let newTable = TableImageView(frame: table.frame, type: .Diamond)
+                            self.delegate?.tableMoved(newTable)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         case .Rect:
                             let newTable = TableImageView(frame: table.frame, type: .Rect)
+                            self.delegate?.tableMoved(newTable)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         case .Round:
                             let newTable = TableImageView(frame: table.frame, type: .Round)
+                            self.delegate?.tableMoved(newTable)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
                             self.dragTableWithGesture(sender)
                         default:
                             let newTable = TableImageView(frame: table.frame, type: .Square)
+                            self.delegate?.tableMoved(newTable)
                             tableContainer.addSubview(newTable)
                             self.dragContext = DragContext(draggedView: newTable, draggedFromType: .PickerContainer)
                             sender.view?.addSubview(newTable)
@@ -232,6 +247,7 @@ class DragDropManager: NSObject {
                             height: CGRectGetHeight(viewBeingDragged.frame)
                         )
                         self.addTableToFloor(viewBeingDragged)
+                        delegate?.tableAddedOnFloor(viewBeingDragged)
                     } else {
                         viewInFloorButIntersectsWithOtherTable = true
                     }

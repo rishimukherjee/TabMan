@@ -19,6 +19,7 @@
 		DF3A3A621C6C998B00728B17 /* TableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A611C6C998B00728B17 /* TableImageView.swift */; };
 		DF3A3A6F1C6CDF7400728B17 /* DragDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */; };
 		DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A3A701C6CE10C00728B17 /* DragContext.swift */; };
+		DFAB644A1C82BC5000008C2E /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB64491C82BC5000008C2E /* GroupManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		DF3A3A611C6C998B00728B17 /* TableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableImageView.swift; sourceTree = "<group>"; };
 		DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropManager.swift; sourceTree = "<group>"; };
 		DF3A3A701C6CE10C00728B17 /* DragContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragContext.swift; sourceTree = "<group>"; };
+		DFAB64491C82BC5000008C2E /* GroupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
 		E6251C352F70D14F03B133D2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1BD98CE05C1348E74F3B468 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3A3A6E1C6CDF7400728B17 /* DragDropManager.swift */,
+				DFAB64491C82BC5000008C2E /* GroupManager.swift */,
 				DF3A3A701C6CE10C00728B17 /* DragContext.swift */,
 			);
 			name = Utils;
@@ -316,6 +319,7 @@
 				DF3A3A5D1C6C840300728B17 /* Table.swift in Sources */,
 				DF3A3A6F1C6CDF7400728B17 /* DragDropManager.swift in Sources */,
 				DF3A3A2D1C6B960300728B17 /* ViewController.swift in Sources */,
+				DFAB644A1C82BC5000008C2E /* GroupManager.swift in Sources */,
 				DF3A3A711C6CE10C00728B17 /* DragContext.swift in Sources */,
 				DF3A3A2B1C6B960300728B17 /* AppDelegate.swift in Sources */,
 			);
@@ -452,6 +456,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rishimukherjee.TabMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -465,6 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rishimukherjee.TabMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

@@ -28,6 +28,8 @@ class TableImageView: UIImageView, UITextFieldDelegate {
     /// Textfield to store the id of the table
     private var idField: UITextField!
 
+    private var _tapped = false
+
     /// Helps get and set the id of the table. Set sets the textfield's text.
     var id: Int? {
         get {
@@ -60,6 +62,15 @@ class TableImageView: UIImageView, UITextFieldDelegate {
         }
         get {
             return self._type
+        }
+    }
+
+    var tapped: Bool {
+        set {
+            _tapped = newValue
+        }
+        get {
+            return _tapped
         }
     }
 
