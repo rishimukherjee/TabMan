@@ -23,6 +23,7 @@ The project is divided into the following:
 1. `Utils`
   * `DragDropManager`: Manages the whole drag and drop in the system. Takes decision on adding and delete of Tables based on its start and destination superviews. Also, puts back a view to its picked up location if it ended on invalid location. It uses `UIPanGestureRecognizer` to handle drag gestures. 
   * `DragContext`: The current drag context. It has all information of the current dragged view.
+  * `GroupManager`: Manages the creation of table groups. Table groups are a group of selected tables by the user inside a single border.
 
 2. `Views`
   * `TableImageView`: Subclass of `UIImageView` which changes image based on the type of the table.
@@ -39,8 +40,10 @@ The project is divided into the following:
 #### Design Decisions
 1. I used `realm` for percistance because of its simplicity and readability.
 2. The drag and drop is handled in a separate class `DragDropManager` to avoid large viewController.
-
+3. Group management is handled in a separate class `GroupManager`.
+4. While making this came to know a lot about `convex hull` as well as `concave hull` algorithms. Though they were not used in this project.
 
 #### Third Party Library
 1. [Realm](https://realm.io/)
 2. Took idea on how to drag and drop from view to another [here](http://www.ancientprogramming.com/2012/04/05/drag-and-drop-between-multiple-uiviews-in-ios/)
+3. Took help from stackoverflow to create the hull [here](http://stackoverflow.com/questions/35693808/uibezierpath-outline-around-multiple-subviews)
